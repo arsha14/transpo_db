@@ -20,5 +20,6 @@ from apis import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('post/', views.Submit.as_view()),
+    path('submit/', views.Submit.as_view()),
+    path('login/', views.Login.as_view())
 ]

@@ -1,9 +1,19 @@
 from django.db import models
 
 # Create your models here.
+class Questionaire(models.Model):
+	question = models.CharField(max_length= 1400)
+
+class Interviewer(models.Model):
+	username = models.CharField(max_length=100, unique=True)
+	password = models.CharField(max_length=100)
+	questions = models.ManyToManyField(Questionaire, blank=True)
+	
+
 class Survey(models.Model):
-	name = models.CharField(max_length=30)
+	interviewer = models.ForeignKey(Interviewer, on_delete=models.CASCADE)
+	name = models.CharField(max_length=30, blank=True)
 	phone = models.IntegerField()
-	gender = models.CharField(max_length=4)
-	home = models.CharField(max_length=100)
-	work = models.CharField(max_length=100)
+	gender = models.CharField(max_length=4, blank=True)
+	home = models.CharField(max_length=100, blank=True)
+	work = models.CharField(max_length=100, blank=True)
