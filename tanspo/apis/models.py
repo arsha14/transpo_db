@@ -3,6 +3,10 @@ from django.db import models
 # Create your models here.
 class Questionaire(models.Model):
 	question = models.CharField(max_length= 1400)
+	question_name = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.question_name
 
 class Interviewer(models.Model):
 	username = models.CharField(max_length=100, unique=True)

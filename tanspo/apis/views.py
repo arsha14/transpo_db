@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from apis.serializers import SurveySerializer, InterviewerSerializer, QuestionaireSerializer
 from apis.models import Interviewer, Questionaire
 from django.http import Http404
@@ -10,9 +11,12 @@ from django.http import Http404
 class Login(APIView):
 	def post(self, request, format=None):
 		info = request.data
-		interviewer = Interviewer.objects.get(username=info['username'])
+		try:
+			interviewer = Interviewer.objects.get(username=info['username'])
+		except Interviewer.DoesNotExist:
+			raise Http404
 		if (info['password']==interviewer.password):
-			serializer = InterviewerSerializer(data=interviewer)
+			serializer = InterviewerSerializer(interviewer)
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		else:
 			raise Http404
