@@ -1,2 +1,5 @@
 env/
+.vscode/
+api/__pycache__/
+formsapi/__pycache__/
 bin/
