@@ -1,5 +1,6 @@
+bin/
 env/
 .vscode/
-api/__pycache__/
-formsapi/__pycache__/
-bin/
+apis/__pycache__/
+tanspo/__pycache__/
+db.sqlite3
